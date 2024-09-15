@@ -20,7 +20,6 @@ export async function POST(
       return new NextResponse("Invalid Item", { status: 400 });
     }
 
-    
     if (!values.date) {
       values.date = null;
     }
@@ -29,8 +28,24 @@ export async function POST(
     if (!formattedPrice) {
       return new NextResponse("Invalid Price", { status: 400 })
     }
-    console.log(formattedPrice)
+
+    const sheetId = values.sheetId;
+
+    const sheet = await db.sheet.findFirst({
+      where: {
+        id: sheetId
+      }
+    })
     
+    
+    if ( !sheet ) {
+      return new NextResponse("Invalid sheet", { status: 400 })
+    }
+
+    if (sheet.userId != userId) {
+      return new NextResponse("Unauthorized", { status: 401 })
+    }
+
     const added = await db.item.create({
       data: {
         name: values.name,

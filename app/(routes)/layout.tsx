@@ -10,7 +10,7 @@ const DashboardLayout = ({
   return (
     <>
       <Navbar />
-      <main className="h-[100vh] pt-[128px]">
+      <main className="relative h-[100vh] pt-[128px]">
         {children}
       </main>
     </>

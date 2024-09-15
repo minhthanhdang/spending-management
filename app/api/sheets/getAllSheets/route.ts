@@ -9,10 +9,12 @@ export async function GET(
   try {
     const { userId } = auth();
 
+    
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      //return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Hi", { status: 200 });
     }
-
+    console.log('userId', userId)
     const sheets = await db.sheet.findMany({
       where: {
         userId

@@ -26,6 +26,8 @@ model Sheet {
   title String?
   description String?
   userId String
+  month Int
+  totalSpending Decimal @default(0)
   items Item[]
 
   @@index([userId])
@@ -34,7 +36,7 @@ model Sheet {
 model Item {
   id Int @id @default(autoincrement())
   name String
-  price String?
+  price Decimal?
   date DateTime?
   category String?
   seller String?
